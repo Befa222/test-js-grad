@@ -29,8 +29,23 @@ The results should have this structure:
  *  greater than 10.x.x
  */
 
+
+const axios = require('axios');
+
 module.exports = async function countMajorVersionsAbove10() {
-  // TODO
+
+  const config = {
+    url: "https://api.npms.io/v2/search/suggestions?q=react",
+    method: "GET",
+    return_payload: true
+  }
+
+  let response = await axios(config)
+ 
+
+  let count = response.data.map(e=> e.package.version.substring(0,2)).map(e=> Number(e)).filter(e=> e > 10).length
+
+  console.log(count)
 
   return count
 };

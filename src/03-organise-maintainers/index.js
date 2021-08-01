@@ -39,8 +39,25 @@ The results should have this structure:
  * be in alphabetical order.
  */
 
+const axios = require('axios');
+
 module.exports = async function organiseMaintainers() {
-  // TODO
+
+  const config = {
+     url: "https://api.npms.io/v2/search/suggestions?q=react",
+    method: "GET",
+     return_payload: true
+   }
+
+  let response = await axios(config)
+
+ let test = response.data.map(e=>e.package).forEach(e=> console.log(e.maintainers)).map(e=>e.username)
+    
+ let test2 = response.data.map(e=>e.package.name).forEach().push(test)
+  
+
+  console.log(test2)
+  //console.log(test2)
 
   return maintainers
 };
