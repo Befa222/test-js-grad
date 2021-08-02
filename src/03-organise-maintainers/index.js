@@ -51,13 +51,13 @@ module.exports = async function organiseMaintainers() {
 
   let response = await axios(config)
 
- let test = response.data.map(e=>e.package).forEach(e=> console.log(e.maintainers)).map(e=>e.username)
+ let findUsername = response.data.map(e=>e.package.maintainers.map(e=>e.username))
     
- let test2 = response.data.map(e=>e.package.name).forEach().push(test)
-  
+ let findPackageNames = response.data.map(e=>e.package.name)
 
-  console.log(test2)
-  //console.log(test2)
+ const newObj = new Map([['username', findUsername], ['packageNames', findPackageNames]])
+
+ const maintainers = Object.fromEntries(newObj)
 
   return maintainers
 };
